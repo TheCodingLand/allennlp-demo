@@ -22,11 +22,11 @@ RUN spacy download en_core_web_sm
 # Cache models early, they're huge
 COPY scripts/ scripts/
 COPY server/models.py server/models.py
-RUN ./scripts/cache_models.py
+RUN python ./scripts/cache_models.py
 
 # Now install and build the demo
 COPY demo/ demo/
-RUN ./scripts/build_demo.py
+RUN python ./scripts/build_demo.py
 
 COPY tests/ tests/
 COPY app.py app.py
@@ -42,4 +42,4 @@ EXPOSE 8000
 
 ENV ALLENNLP_DEMO_DIRECTORY /stage/allennlp/demo
 
-ENTRYPOINT ["./app.py"]
+ENTRYPOINT ["python", "./app.py"]
